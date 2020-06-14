@@ -46,23 +46,3 @@ fi
 if [ ! -f $BUILD_DIR/build.xml ] ; then
 	echo "Failed to build app with Apache Ant"
 fi
-
-
-# change to build dir to run ant
-cd ${BUILD_DIR}
-
-export ANT_OPTS="-Xmx512m"
-
-# build app
-BUILDCMD="$ANT_HOME/bin/ant -Duser.home=${BUILD_DIR}"
-echo "-----> executing $BUILDCMD"
-
-$BUILDCMD 2>&1 | indent
-ls -al ${PWD}  | indent
-
-ls -al ${BUILD_DIR}  | indent
-
-if [ "${PIPESTATUS[*]}" != "0 0" ]; then
-  echo " !     Failed to build app with Apache Ant"
-  exit 1
-fi
